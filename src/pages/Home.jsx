@@ -5,11 +5,11 @@ import exerciserTwo from "../assets/two.jpg";
 function Home() {
   return (
     <>
-      <section className="flex flex-col lg:flex-row gap-5 lg:gap-10 mb-16">
+      <section className="flex flex-col lg:flex-row justify-center items-center gap-5 lg:gap-10 mb-16">
         <img
           src={exerciserOne}
           alt="A woman that is exercising."
-          className="w-full max-w-lg rounded-lg shadow-primary shadow-md"
+          className="w-full max-w-lg rounded-lg shadow-md shadow-primary"
         />
         <div className="fade-in-right max-w-lg">
           <h1 className="font-bold text-3xl text-primary mb-5">
@@ -32,11 +32,11 @@ function Home() {
           </Link>
         </div>
       </section>
-      <section className="flex flex-col lg:flex-row-reverse gap-5 lg:gap-10 mb-10">
+      <section className="flex flex-col lg:flex-row-reverse justify-center items-center gap-5 lg:gap-10 mb-10">
         <img
           src={exerciserTwo}
           alt="A man that is exercising"
-          className="w-full max-w-lg rounded-lg shadow-primary shadow-md"
+          className="w-full max-w-lg rounded-lg shadow-md shadow-primary"
         />
         <div className="fade-in-left max-w-lg">
           <h1 className="font-bold text-3xl text-primary mb-5">
