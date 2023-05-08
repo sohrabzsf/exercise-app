@@ -7,6 +7,7 @@ export function AppProvider({ children }) {
     JSON.parse(localStorage.getItem("exercises"))
   );
   const [results, setResults] = useState([]);
+  const [videos, setVidoes] = useState([]);
 
   // gets the exercises from the api and adds them to local storage if it's not already there
   async function getExercises() {
@@ -34,6 +35,7 @@ export function AppProvider({ children }) {
     }
   }
 
+  // finds the matching exercises with the user input in search bar and puts them in results
   function searchExercises(text) {
     const searchedExercises = exercises.filter((exercise) => {
       return (
@@ -47,9 +49,51 @@ export function AppProvider({ children }) {
     setResults(searchedExercises);
   }
 
+  // finds a specific exercise and returns it
+  function findExercise(id) {
+    return results.find((result) => result.id === id);
+  }
+
+  // gets the videos related to the name from the api and puts them in the videos state
+  async function getVideos(name) {
+    const queryParam = name.replace(/ /g, "%20");
+    const url = `https://${
+      import.meta.env.VITE_YOUTUBESEARCH_API_HOST
+    }/search?query=${queryParam}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+        "X-RapidAPI-Host": import.meta.env.VITE_YOUTUBESEARCH_API_HOST,
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      setVidoes(data.contents);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // sets videos to initial value
+  function clearVideos() {
+    setVidoes([]);
+  }
+
   return (
     <AppContext.Provider
-      value={{ exercises, results, getExercises, searchExercises }}
+      value={{
+        exercises,
+        results,
+        videos,
+        getExercises,
+        searchExercises,
+        findExercise,
+        getVideos,
+        clearVideos,
+      }}
     >
       {children}
     </AppContext.Provider>
