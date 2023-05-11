@@ -12,15 +12,13 @@ export function AppProvider({ children }) {
   // gets the exercises from the api and adds them to local storage if it's not already there
   async function getExercises() {
     if (!exercises) {
-      const url = `https://${
-        import.meta.env.VITE_EXERCISEDB_API_HOST
-      }/exercises`;
+      const url = "https://exercisedb.p.rapidapi.com/exercises";
       const options = {
         method: "GET",
         headers: {
           "content-type": "application/octet-stream",
           "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
-          "X-RapidAPI-Host": import.meta.env.VITE_EXERCISEDB_API_HOST,
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
         },
       };
 
@@ -57,14 +55,12 @@ export function AppProvider({ children }) {
   // gets the videos related to the name from the api and puts them in the videos state
   async function getVideos(name) {
     const queryParam = name.replace(/ /g, "%20");
-    const url = `https://${
-      import.meta.env.VITE_YOUTUBESEARCH_API_HOST
-    }/search?query=${queryParam}`;
+    const url = `https://youtube-search-and-download.p.rapidapi.com/search?query=${queryParam}`;
     const options = {
       method: "GET",
       headers: {
         "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
-        "X-RapidAPI-Host": import.meta.env.VITE_YOUTUBESEARCH_API_HOST,
+        "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
       },
     };
 
